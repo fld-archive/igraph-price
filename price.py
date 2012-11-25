@@ -25,13 +25,21 @@ def price(m, a, n):
 
 	j = m
 
-	# 
+	"""
 	while(j < n):
 		ind = g.indegree()
 		g.add_vertex(j)
 		if(j/(j+a) > random()):
 			g.add_edge(j,m)
 		j += 1 
+	"""
+
+	while(len(g.indegree()) < n):
+		g.add_vertex(j)
+		for i in g.indegree():
+			if(i + (a/m) > random()):
+				g.add_edge(i,j)
+		j += 1
 
 	return g
 
@@ -40,7 +48,7 @@ def price(m, a, n):
 
 
 # Tesztelés
-p = price(3, 1, 10)
+p = price(3, 0.2, 20)
 print(p.vcount())
 print(p.ecount())
 print(p.is_directed())
