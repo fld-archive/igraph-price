@@ -35,11 +35,3 @@ def price(m, a, n):
 		j += 1
 
 	return g
-
-# Testing
-p = price(3, 1, 10)
-print(p.ecount())
-
-p.vs["label"] = range(p.vcount())
-
-plot(p)
