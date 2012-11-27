@@ -25,31 +25,21 @@ def price(m, a, n):
 
 	j = m
 
-	"""
-	while(j < n):
+	while(len(g.indegree()) < n):
+		el = g.get_edgelist()
 		ind = g.indegree()
 		g.add_vertex(j)
-		if(j/(j+a) > random()):
-			g.add_edge(j,m)
-		j += 1 
-	"""
-
-	while(len(g.indegree()) < n):
-		g.add_vertex(j)
-		for i in g.indegree():
-			if(i + (a/m) > random()):
-				g.add_edge(i,j)
+		for i in xrange(j):
+			if(ind[i] + (a/j) > random()):
+				g.add_edge(j,i)
 		j += 1
 
 	return g
 
-
-
-
-
-# Tesztelés
-p = price(3, 0.2, 20)
-print(p.vcount())
+# Testing
+p = price(3, 1, 10)
 print(p.ecount())
-print(p.is_directed())
+
+p.vs["label"] = range(p.vcount())
+
 plot(p)
