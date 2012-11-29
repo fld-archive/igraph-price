@@ -4,11 +4,11 @@
 from __future__ import division
 from __future__ import print_function
 
-from price import *
+import price
 
 """ Create a graph, and print out its properties
 """
-p = price(3,0.5,10)
+p = price.price(3,0.5,10)
 
 # Summary
 print()
