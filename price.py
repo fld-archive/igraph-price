@@ -2,7 +2,6 @@
 # coding: utf-8
 
 from __future__ import division
-from __future__ import print_function
 
 import igraph
 import random
@@ -22,7 +21,7 @@ def price(m, a, n):
 	# Initialize an empty, directed graph
 	g = igraph.Graph(directed=True)
 
-	# add starting vertex
+	# add starting vertices
 	g.add_vertices(m)
 	
 	
@@ -33,15 +32,16 @@ def price(m, a, n):
 		# generate edgelist
 		el = range(g.vcount()-1)
 		
-		# calculate connection probability for each vertex
+		# calculate connection attractivity for each vertex
 		cp = []
 		li = [i + a for i in g.indegree()]
 		sm = sum(li)
 		for i in range(g.vcount()):
-			cp.append( (g.indegree(i) + a) / sm )
+			cp.append(li[i] / sm)
 
-		# walk through the vertices, and add m edges
+		# walk through the vertices
 		for i in el:
+			# add edge, if a random number is greater than attractivity of the vertex
 			if random.random() > cp[i]:
 				g.add_edge(g.vcount() - 1, i)
 
