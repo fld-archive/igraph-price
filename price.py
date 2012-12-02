@@ -11,29 +11,40 @@ import random
 __author__ = "Laszlo Daniel Fogas, Tamas Endrodi"
 
 def price(m, a, n):
-    """Returns a graph based on the Price model
+	"""Returns a graph based on the Price model
 
-    Parameters:
-    m -- number of starting vertices
-    a -- initial attractivity
-    n -- number of vertices in the end of the generation
+	Parameters:
+	m -- starting vertices
+	a -- initial attractivity
+	n -- size of the network
+	"""
 
-    """
 	# Initialize an empty, directed graph
 	g = igraph.Graph(directed=True)
 
-	# add starting vertices
-    g.add_vertices(m)
+	# add starting vertex
+	g.add_vertices(m)
+	
+	
+	while g.vcount() < n:
+		# add vertex
+		g.add_vertices(1)
 
-	j = m
+		# generate edgelist
+		el = range(g.vcount()-1)
+		
+		# calculate connection probability for each vertex
+		cp = []
+		li = [i + a for i in g.indegree()]
+		sm = sum(li)
+		for i in range(g.vcount()):
+			cp.append( (g.indegree(i) + a) / sm )
 
-	while len(g.indegree()) < n:
-		ind = g.indegree()
-		g.add_vertex(j)
-		for i in xrange(j):
-			if ind[i] + a/j > random.random():
-				g.add_edge(j,i)
-		j += 1
+		# walk through the vertices, and add m edges
+		for i in el:
+			if random.random() > cp[i]:
+				g.add_edge(g.vcount() - 1, i)
 
+
+	# Return the graph
 	return g
-
