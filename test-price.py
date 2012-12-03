@@ -8,9 +8,9 @@ import igraph
 import price
 
 # Define variables
-sv = 3		# starting vertices
-at = .8 	# attractivity
-ns = 10		# network size
+sv = 3      # starting vertices
+at = .8     # attractivity
+ns = 20     # network size
 
 """ Create a graph, and print out its properties
 """
